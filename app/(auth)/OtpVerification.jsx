@@ -92,7 +92,7 @@ const OtpVerification = () => {
 
                     await setItem('token', response.data.token);
                     const token = await getItem('token', response.data.token);
-                    console.log("token", token);
+                    console.log("token from OTPVerification Page:------>", token);
                     
                     await removeItem('user');
                     

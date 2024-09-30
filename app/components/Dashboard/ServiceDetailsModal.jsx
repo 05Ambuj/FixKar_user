@@ -1,11 +1,10 @@
-// ServiceDetailsModal.js
 import React from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet, Modal, Pressable, Dimensions } from "react-native";
 import { Link } from "expo-router";
 
 const { height } = Dimensions.get("window");
 
-const ServiceDetailsModal = ({ modalVisible, setModalVisible, selectedService, handleRequestService }) => {
+const ServiceDetailsModal = ({ modalVisible, setModalVisible, selectedService }) => {
   return (
     <Modal
       animationType="slide"
@@ -23,15 +22,12 @@ const ServiceDetailsModal = ({ modalVisible, setModalVisible, selectedService, h
                 : `data:image/jpeg;base64,${selectedService?.image}`,
             }}
             style={styles.modalImage}
-            resizeMode="cover" // Added to ensure the image fits well
+            resizeMode="cover"
           />
           <Text style={styles.modalDescription}>{selectedService?.description}</Text>
           <Text style={styles.modalPrice}>Price: ₹{selectedService?.price}</Text>
-          
+
           <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={() => handleRequestService(selectedService)} style={styles.button}>
-              <Text style={styles.buttonText}>Request Service</Text>
-            </TouchableOpacity>
             <Link href={`/profile/${selectedService?._id}`} style={styles.button}>
               <Text style={styles.buttonText}>View Profile</Text>
             </Link>
@@ -45,7 +41,6 @@ const ServiceDetailsModal = ({ modalVisible, setModalVisible, selectedService, h
     </Modal>
   );
 };
-
 const styles = StyleSheet.create({
   modalOverlay: {
     flex: 1,

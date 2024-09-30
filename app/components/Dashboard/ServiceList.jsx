@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, FlatList, ActivityIndicator } from "react-native";
 import ServiceCard from "./ServiceCard"; // Assuming you have a ServiceCard component
 
-const ServiceList = ({ searchQuery }) => {
+const ServiceList = () => {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -41,11 +41,6 @@ const ServiceList = ({ searchQuery }) => {
     setExpandedServiceId(expandedServiceId === serviceId ? null : serviceId);
   };
 
-  // Filter services based on search query
-  const filteredServices = services.filter(service =>
-    service.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
   if (loading) {
     return <ActivityIndicator size="large" color="#1A73E8" />;
   }
@@ -54,13 +49,13 @@ const ServiceList = ({ searchQuery }) => {
     return <Text style={styles.errorMessage}>Error: {error}</Text>;
   }
 
-  if (filteredServices.length === 0) {
+  if (services.length === 0) {
     return <Text style={styles.noResults}>No services found</Text>;
   }
 
   return (
     <FlatList
-      data={filteredServices} // Use filtered services here
+      data={services}
       keyExtractor={(item) => item._id} // Use _id for unique key
       renderItem={({ item }) => {
         return (
